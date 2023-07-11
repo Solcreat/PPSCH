@@ -1,0 +1,48 @@
+def f1(name_of_file):
+    return "".join([x.rstrip() for x in name_of_file])
+def f2(name_of_file):
+    return name_of_file.readline()
+def f3(name_of_file):
+    return name_of_file.readlines()
+def f4(name_of_file):
+    return [x.rstrip() for x in name_of_file]
+def f5(name_of_file):
+    for x in name_of_file:
+        print(x.rstrip())
+    return "\n"
+def f6(name_of_file):
+    return " ".join([x.rstrip() for x in name_of_file])
+def f7(string):
+    return string.rstrip()
+def f8(string):
+    return string.rstrip("!?.")
+def f9(name_of_file, name_of_file1):
+    name_of_file1.write(name_of_file.readline())
+    return 1
+def f10(name_of_file, name_of_file1):
+    name_of_file1.writelines([name_of_file.readline(), "\n"])
+    return 1
+def f11(lst, name_of_file):
+    for x in lst:
+        name_of_file.writelines([x, "\n"])
+    return 1
+def f12(name_of_file, name_of_file1):
+    with open(name_of_file) as f:
+        with open(name_of_file1, "w") as d:
+            for x in f:
+                print(x, file=d)
+    return 1
+def f13(name_of_file, name_of_file1):
+    with open(name_of_file) as f:
+        with open(name_of_file1, "w") as d:
+            for x in f:
+                if (x.startswith("hello") and x.rstrip().endswith("world")):
+                    d.write(x)
+    return 1
+def f14(name_of_file):
+    with open(name_of_file, encoding="utf8") as f:
+        d = {}
+        f.readline()
+        for x in f:
+            d[x.split()[0]] = (x.split()[1:])
+    return d
