@@ -1,0 +1,8 @@
+def custom_print(*args, **kwargs):
+    out_1 = [str(x) for x in args]
+    out_2 = [f"{x}={y}" for x,y in kwargs.items() if x not in ["sep", "end"]]
+    print(kwargs.get("sep", " ").join(out_1+out_2) + kwargs.get("end", " "))
+custom_print(1, 2, 3, a=4, b=5, sep="-", end="!")
+custom_print("hello", "world", sep=" ")
+custom_print('apple', "banana", "cherry", sep = ", ")
+custom_print(a=1, b=2,end="...")
