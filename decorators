@@ -1,0 +1,120 @@
+import time
+
+
+def dec_timer(func):  # декоратор timer, который измеряет время выполнения ф-ии и выводит результат на экран
+    def inside_function(*args, **kwargs):
+        st = time.time()
+        func(*args, **kwargs)
+        fn = time.time()
+        print(f"Время выполнения {func.__name__} = {fn - st}")
+
+    return inside_function
+
+
+# @dec_timer
+# def counter_even(a):  # тестовая функция, которая прнимает словарь.
+#     for x in range(100000):
+#         if x % 2 == 0:
+#             a.append(x)
+#     return a
+#
+#
+# g = [1, 2, 3]
+# counter_even(g)
+#
+#
+# @dec_timer
+# def counter_odd_sqrt(a):  # тестовая функция, которая прнимает словарь.
+#     for x in range(100000):
+#         if x % 2 != 0:
+#             a.append(x ** 2)
+#     return a
+#
+#
+# counter_odd_sqrt(g)
+#
+#
+# @dec_timer
+# def aver(*args):  # тестовая функция, которая ищет среднее между числами, и затем находит кол-во четных пар от 1 до av.
+#     sum1 = sum(args)
+#     av = int(sum1 / len(args))
+#     count = 0
+#     for x in range(1, av):
+#         for y in range(x + 1, av + 1):
+#             if x % 2 == 0 and y % 2 == 0:
+#                 count += 1
+#     return count
+#
+#
+# aver(9009, 9299, 9999, 10000, 12000, 24000)
+
+
+def dec_cache(func): # декоратор cache, который кэширует результаты выполнения функции и возвр. сохр. значение.
+    saved = {}
+
+    def cacher(*args):
+        if args not in saved:
+            saved[args] = func(*args)
+        return saved[args]
+
+    return cacher
+#
+#
+# @dec_cache
+# def fib(x): # тестовая функция фибоначчи
+#     if x <= 1:
+#         return 1
+#     return fib(x - 1) + fib(x - 2)
+#
+#
+# print(fib(200))
+#
+#
+# @dec_cache
+# def pribavlator(a, b, c): # тестовая функция с большой рекурсией
+#     if a <= 0 and b <= 0 and c <= 0:
+#         return 1
+#     return pribavlator(a - 1, b - 1, c - 1) + pribavlator(a - 2, b - 2, c - 2)
+#
+#
+# print(pribavlator(40, 50, 60))
+
+
+def dec_logging(func): # декоратор logging, который функции с аргументами в log файл.
+    def inside(*args):
+        with open("results.log", "w") as f:
+            f.writelines([str(func.__name__), str(args)])
+
+    return inside
+
+# @dec_logging
+# def aver(*args):  # тестовая функция, которая ищет среднее между числами, и затем находит кол-во четных пар от 1 до av.
+#     sum1 = sum(args)
+#     av = int(sum1 / len(args))
+#     count = 0
+#     for x in range(1, av):
+#         for y in range(x + 1, av + 1):
+#             if x % 2 == 0 and y % 2 == 0:
+#                 count += 1
+#     return count
+#
+#
+# aver(9009, 9299, 9999, 10000, 12000, 2000)
+
+def dec_retry(func):
+    print("Сколько раз попробовать?")
+    def inside(*args, n=int(input())): # n - кол-во попыток если ф-ия вернула None
+        if func(*args) is None:
+            for x in range(n):
+                time.sleep(2)
+                print("Введите новые аргументы для вашей функции:")
+                args = [int(x) for x in input().split()]
+                func(*args)
+    return inside
+# @dec_retry
+# def even_or_odd(x,y):
+#     if x % 2 == 0 and y % 2 == 0:
+#         print(100, "We are win")
+#     else:
+#         pass
+# even_or_odd(25,30) 
