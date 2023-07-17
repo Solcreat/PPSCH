@@ -80,7 +80,7 @@ def dec_cache(func): # декоратор cache, который кэширует
 # print(pribavlator(40, 50, 60))
 
 
-def dec_logging(func): # декоратор logging, который функции с аргументами в log файл.
+def dec_logging(func): # декоратор logging, который записывает функции с аргументами в log файл.
     def inside(*args):
         with open("results.log", "w") as f:
             f.writelines([str(func.__name__), str(args)])
