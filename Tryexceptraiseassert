@@ -1,0 +1,94 @@
+# try:
+#     ar_expr = input().split()
+#     print(float(ar_expr[0]) / float(ar_expr[2]))
+# except ZeroDivisionError:
+#     print("ERROR")
+# # 1
+# def passwords(*args):
+#     b = []
+#     for x in args:
+#         try:
+#             b.append(int(x, 16))
+#         except ValueError:
+#             print(f"Не, не, не, пароль {x} вообще не то.")
+#     return [hex(x)[2:] for x in b]
+# print(passwords("123", "ruina", "67f","Hto_ya&", "35", "1d32", "0000jk"))
+# #2
+# olympiad1 = {"name": "Пробная вышка",
+# "winners": {
+#                 "Олеся Олимпиадникова": 594,
+#                 "Олег Олимпиадников": 587,
+#                 "Онисим Олимпиадников": 581,
+#            }
+# }
+# olympiad2 = {"name": "Горные воробьи",
+# "winners": {
+#                 "Ольга Олимпиадникова": (20, 20, 19, 20),
+#                 "Олеся Олимпиадникова": (19, 19, 20, 20, 17),
+#                 "Офелия Олимпиадникова": (20, 20, 20, 20, 13)
+#            }
+# }
+# def areinwinners(fullname):
+#     try:
+#         print(f'{olympiad1["name"]} статус {olympiad1["winners"][fullname]}')
+#     except KeyError:
+#         print("Ваш статус призер.")
+#     try:
+#         print(f'{olympiad2["name"]} статус {olympiad2["winners"][fullname][4]}')
+#     except IndexError:
+#         print("Ваш статус призер.")
+#     finally:
+#         return "Вы победитель! Поздравляем!"
+# print(areinwinners("Ольга Олимпиадникова"))
+# print(areinwinners("Олеся Олимпиадникова"))
+# 3
+#Крайне невежливая программа
+def f():
+    try:
+        while True:
+            pass
+    except KeyboardInterrupt:
+        print("Это все, на что ты способен?")
+        f()
+f()
+# 4
+class LizardInLemonadeMug(Exception):
+    pass
+class BarBurntDown(Exception):
+    pass
+print("Заходит однажды тестировщик в бар.")
+print("Заказывает:")
+try:
+    a = input()
+    assert int(a) == 1, "У бара сегодня кризис: не больше одной кружки в одни руки"
+    b = input()
+    assert int(b) == 1, "У бара сегодня кризис: не больше одной кружки в одни руки"
+except AssertionError:
+    print("У бара сегодня кризис: не больше одной кружки в одни руки")
+try:
+    a = input()
+    b = input()
+    if int(a) == 0 or int(a) > 999 or int(b) == 0 or int(b) > 999:
+        raise ValueError
+except ValueError:
+    print("Слишком мало, а может и слишком много...")
+try:
+    c = input()
+    if c == "ящерица в стакане":
+        raise LizardInLemonadeMug()
+except LizardInLemonadeMug:
+    print("Да чтож такое-то...")
+try:
+    a = input()
+    b = input()
+    if int(a) < 0 or int(b) < 0:
+        raise ValueError
+except ValueError:
+    print("Заказано не реальное число кружек")
+try:
+    whereisthetoilet = input()
+    if whereisthetoilet == "Где туалет?":
+        raise BarBurntDown
+except BarBurntDown:
+    print("Бар сгорел.")
+# 5
